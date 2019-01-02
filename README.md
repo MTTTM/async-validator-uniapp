@@ -1,27 +1,21 @@
 ## async-validator-uniapp
 > a simgle tool for valid form
-> [github](http://jianshu.com)
+> [github](https://github.com/MTTTM/async-validator-uniapp.git)
 ## Usage
 ###安装
 ##### 若项目之前未使用npm管理依赖（项目根目录下无package.json文件），先在项目根目录执行命令初始化npm工程：
 > npm init -y
 ##### 在项目根目录执行命令安装npm包：
-> npm install packageName --save
+> npm i async-validator-uniapp --save
 ##### 使用
-> import package from 'packageName'
+> import package from 'async-validator-uniapp'
 
 ### 全局导入
 
 ```html
-    import xPlus from "./components/x-form/src/index.js"
+    import xPlus from "async-validator-uniapp"
 	xPlus.install(Vue);
 ```
-### 局部导入
-```html
-
-```
-
-
 ### API
  #### xPlus.install
  > * 第一个参数是Vue
@@ -327,7 +321,4 @@ prop|string|--|对应的校验规则，强烈推荐和改表单的绑定值得ke
 
 
 
-## About author
-> * name:Boolean
-> * email:x13352840347@gmail.com
-> * github:
+
