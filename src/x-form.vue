@@ -45,7 +45,7 @@
 				this.validate();
 				this.$emit("submit", e)
 			},
-			onReset() {
+			onReset(e) {
 				this.resetFields();
 				this.$emit("reset", e)
 			},
