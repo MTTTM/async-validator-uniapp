@@ -1,6 +1,6 @@
 <template name="x-radio">
 	<label class="x-input" :class="[disabled?'x-input-disabled':'']">
-	  <radio :value="val" :checked="checked" :disabled="disabled" color="color" /><text class="x-input-label">{{label}}</text>
+	  <radio :value="value" :checked="checked" :disabled="disabled" color="color" /><text class="x-input-label">{{label}}</text>
 	</label>
 </template>
 
@@ -15,7 +15,7 @@
 					return false;
 				}
 			},
-			val: {
+			value: {
 				required: false,
 				type: [String, Number]
 			},

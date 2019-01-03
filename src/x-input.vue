@@ -1,25 +1,25 @@
 <template name="x-input">
 	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input':'',disabled?'x-input-disabled':'']" v-if="type==='text'">
-		<input class="uni-input" :value="val" :placeholder="placeholder" @input="onChange" @blur='onBlur' :disabled="disabled" />
+		<input class="uni-input" :value="value" :placeholder="placeholder" @input="onChange" @blur='onBlur' :disabled="disabled" />
 		<view class="x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
 	</view>
 	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input':'',disabled?'x-input-disabled':'']" v-else-if="type==='password'">
-		<input class="uni-input" password="true" :value="val" :placeholder="placeholder" @input="onChange" @blur='onBlur'
+		<input class="uni-input" password="true" :value="value" :placeholder="placeholder" @input="onChange" @blur='onBlur'
 		 :disabled="disabled" />
 		<view class="x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
 	</view>
 	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input':'',disabled?'x-input-disabled':'']" v-else-if="type==='number'">
-		<input class="uni-input" type="number" :value="val" :placeholder="placeholder" @input="onChange" @blur='onBlur'
+		<input class="uni-input" type="number" :value="value" :placeholder="placeholder" @input="onChange" @blur='onBlur'
 		 :disabled="disabled" />
 		<view class="x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
 	</view>
 	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input':'',disabled?'x-input-disabled':'']" v-else-if="type==='digit'">
-		<input class="uni-input" type="digit" :value="val" :placeholder="placeholder" @input="onChange" @blur='onBlur'
+		<input class="uni-input" type="digit" :value="value" :placeholder="placeholder" @input="onChange" @blur='onBlur'
 		 :disabled="disabled" />
 		<view class="x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
 	</view>
 	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input':'',disabled?'x-input-disabled':'']" v-else-if="type==='idcard'">
-		<input class="uni-input" type="idcard" :value="val" :placeholder="placeholder" @input="onChange" @blur='onBlur'
+		<input class="uni-input" type="idcard" :value="value" :placeholder="placeholder" @input="onChange" @blur='onBlur'
 		 :disabled="disabled" />
 		<view class="x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
 	</view>
@@ -35,7 +35,7 @@
 				type: String,
 				required: true,
 			},
-			val: {
+			value: {
 				type: [String, Number],
 			},
 			prop: {

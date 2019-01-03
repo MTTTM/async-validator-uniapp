@@ -4,8 +4,8 @@ import xCheckboxGroup from './x-checkbox-group.vue'
 import xCheckbox from './x-checkbox.vue'
 import xRadioGroup from './x-radio-group.vue'
 import xRadio from './x-radio.vue'
-
 import xPicker from './x-picker.vue'
+import xTextarea from './x-textarea.vue'
 const xPlus = {};
 xPlus.install = function(Vue, pr) {
 	let p = String(pr).length && /^[a-z]&/.test(pr) ? pr : 'x';
@@ -16,6 +16,7 @@ xPlus.install = function(Vue, pr) {
 	Vue.component(`${p}-radio-group`, xRadioGroup)
 	Vue.component(`${p}-radio`, xRadio)
 	Vue.component(`${p}-picker`, xPicker)
+	Vue.component(`${p}-textarea`, xTextarea)
 
 }
 export default xPlus;

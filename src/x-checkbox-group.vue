@@ -13,7 +13,7 @@
 		mixins:[Mixins],
 		name: "x-checkbox-group",
 		props: {
-			val: {
+			value: {
 				type: Array,
 			},
 			prop: {

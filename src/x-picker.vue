@@ -1,7 +1,7 @@
 <template name="x-picker">
 	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input':'']" >
 		 <picker class="picker-item" :mode="mode" :start="start" :end="end" @change="onChange" :disabled="disabled">
-			<x-input type="text" :val="inputValue" prop="input" :disabled="disabled"></x-input>
+			<x-input type="text" :value="value" prop="input" :disabled="disabled" :placeholder="placeholder"></x-input>
          </picker>
 		 <view class="x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
 	</view>
@@ -13,6 +13,12 @@
 		mixins:[Mixins],
 		name: "x-picker",
 		props: {
+			placeholder:{
+				type:String,
+				default:()=>{
+					return "请选择"
+				}
+			},
 			start: {
 				type: String,
 				required:true,
@@ -32,7 +38,7 @@
 			    type:String,
 				default:"text"
 			},
-			val: {
+			value: {
 				type: String
 			},
 			prop: {

@@ -13,7 +13,7 @@
 		mixins:[Mixins],
 		name: "radio-group",
 		props: {
-			val: {
+			value: {
 				type: [String, Number],
 			},
 			prop: {

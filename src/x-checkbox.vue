@@ -1,6 +1,6 @@
 <template name="x-checkbox">
 	<label class="x-input" :class="[disabled?'x-input-disabled':'']">
-	 <checkbox :value="val" :checked="checked" :disabled="disabled" color="color" /><text class="x-input-label">{{label}}</text>
+	 <checkbox :value="value" :checked="checked" :disabled="disabled" color="color" /><text class="x-input-label">{{label}}</text>
 	</label>
 </template>
 
@@ -15,7 +15,7 @@
 					return false;
 				}
 			},
-			val: {
+			value: {
 				required: false,
 				type: [String, Number]
 			},
