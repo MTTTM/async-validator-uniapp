@@ -1,14 +1,22 @@
 ## async-validator-uniapp
-> a simgle tool for valid form
-> [github](https://github.com/MTTTM/async-validator-uniapp.git)
+* 一个简单的表单校验组件
+* 它类似于jquery validate
+* 如果你使用过elementui或者iview的表单校验，你会很容易就喜欢上它
+* 没错，它依赖了async-validator，同时提供了和elementui表单校验几乎一样的接口
+
 ## Usage
 ###安装
 ##### 若项目之前未使用npm管理依赖（项目根目录下无package.json文件），先在项目根目录执行命令初始化npm工程：
 > npm init -y
+
 ##### 在项目根目录执行命令安装npm包：
 > npm i async-validator-uniapp --save
+
 ##### 使用
-> import package from 'async-validator-uniapp'
+> import xPlus  from 'async-validator-uniapp'
+
+##### 提示
+> uniapp包会比npm上面的滞后或停止更新
 
 ### 全局导入
 
@@ -18,22 +26,26 @@
 ```
 ### API
  #### xPlus.install
- > * 第一个参数是Vue
- > * 第二个参数是你要给你的标签添加的前缀，如果不使用默认是"x"
-#### validate
- > * this.$refs['form的ref'].validate
- > * 验证整个form是否通过校验
-#### validateField
-> * this.$refs['form的ref'].validateField('对应表单的prop')
-> * 校验当个表单
+##### 第一个参数是Vue
+##### 第二个参数是你要给你的标签添加的前缀，如果不使用默认是"x"
+
+#### validate  验证整个form是否通过校验
+this.$refs['form的ref'].validate
+
+
+#### validateField校验当个表单
+this.$refs['form的ref'].validateField('对应表单的prop')
+#### resetFields 清空某个表单或者整个from
+this.$refs['form的ref'].resetFields('对应表单的prop,如果不填就是清空整个form')
 
 ### 标签
-> *  x-form
-> *  x-input
-> *  x-checkbox-group
-> *  x-radio-group
-> *  x-picker
+#####  x-form
+#####  x-input
+#####  x-checkbox-group
+#####  x-radio-group
+#####  x-picker
 #### x-form
+
 属性名|类型|默认值|说明
 ---|:--:|:--:|---:
 rules|object|--|必填，校验规则
@@ -43,30 +55,30 @@ ref|Object|--|x-form组件的应用可以调用validateField和validate
 #### x-input
 属性名|类型|默认值|说明
 ---|:--:|:--:|---:
-type|string|--|默认text,类型请插件uniapp文档
-val|string|Number|--|表单显示值
-prop|string|--|对应的校验规则，强烈推荐和改表单的绑定值得key保持一致
+type|string|--|默认text,类型请参考uniapp文档
+val|string|Number|表单显示值
+prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得key保持一致
 @input|Function|--|同步数据到当前页面
 
 #### x-checkbox-group
 属性名|类型|默认值|说明
 ---|:--:|:--:|---:
-val|string|Number|--|表单显示值
-prop|string|--|对应的校验规则，强烈推荐和改表单的绑定值得key保持一致
+val|string|Number|表单显示值
+prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得key保持一致
 @input|Function|--|同步数据到当前页面
 
 #### x-radio-group
 属性名|类型|默认值|说明
 ---|:--:|:--:|---:
-val|string|Number|--|表单显示值
-prop|string|--|对应的校验规则，强烈推荐和改表单的绑定值得key保持一致
+val|string|Number|表单显示值
+prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得key保持一致
 @input|Function|--|同步数据到当前页面
 
 #### x-picker
 属性名|类型|默认值|说明
 ---|:--:|:--:|---:
-val|string|Number|--|表单显示值
-prop|string|--|对应的校验规则，强烈推荐和改表单的绑定值得key保持一致
+val|string|Number|表单显示值
+prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得key保持一致
 @input|Function|--|同步数据到当前页面
 
 ## example
