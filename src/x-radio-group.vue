@@ -1,5 +1,5 @@
 <template name="x-radio-group">
-	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input-no-border ':'']" >
+	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input-no-border ':'',disabled?'x-input-disabled':'']" >
 		<radio-group @change="onChange">
 			<slot></slot>
 		</radio-group>
@@ -18,11 +18,17 @@
 			},
 			prop: {
 				type: String
+			},
+			disabled: {
+				type: Boolean,
+				default: () => {
+					return false;
+				}
 			}
 		}
 	}
 </script>
 
-<style>
-@import url("./style.css");
+<style lang="less">
+@import url("./style.less");
 </style>

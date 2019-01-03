@@ -1,0 +1,42 @@
+.x-input {
+	margin-bottom: 15px;
+	border: 1px solid transparent;
+	position: relative;
+	//嵌套的x-input没有下间距
+   .x-input{
+	   margin-bottom: 0;
+   }
+	&.x-error-input {
+		border: 1px solid red;
+		color: red;
+		.x-error {
+			color: red;
+			position: absolute;
+			left: 0;
+			bottom: -22px;
+		}
+	}
+	//raido checkbox类型不需要边框
+	&.x-error-input-no-border {
+		color: red;
+	}
+	//禁用样式
+	&.x-input-disabled {
+		color: #c0c4cc;
+		//checkbox的label样式
+        .x-input-label{
+			color: #c0c4cc;
+		}
+		//input类型的样式
+		.uni-input,
+		input {
+			background-color: #e4e7ed;
+		}
+
+		/* radio的样式 */
+		.uni-radio-input {
+			opacity: 0.2;
+		}
+	}
+
+}

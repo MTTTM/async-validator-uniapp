@@ -1,6 +1,6 @@
 <template name="x-checkbox-group">
 	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input-no-border ':'']" >
-		<checkbox-group @change="onChange">
+		<checkbox-group @change="onChange" :disabled="disabled">
 			<slot></slot>
 		</checkbox-group>
 		<view class="x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
@@ -18,11 +18,17 @@
 			},
 			prop: {
 				type: String
+			},
+			disabled: {
+				type: Boolean,
+				default: () => {
+					return false;
+				}
 			}
 		}
 	}
 </script>
 
-<style>
-@import url("./style.css");
+<style lang="less">
+@import url("./style.less");
 </style>

@@ -1,7 +1,7 @@
 <template name="x-picker">
 	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input':'']" >
-		 <picker class="picker-item" :mode="mode" :start="start" :end="end" @change="onChange">
-			<x-input type="text" :val="inputValue" prop="input"></x-input>
+		 <picker class="picker-item" :mode="mode" :start="start" :end="end" @change="onChange" :disabled="disabled">
+			<x-input type="text" :val="inputValue" prop="input" :disabled="disabled"></x-input>
          </picker>
 		 <view class="x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
 	</view>
@@ -37,11 +37,17 @@
 			},
 			prop: {
 				type: String
+			},
+			disabled: {
+				type: Boolean,
+				default: () => {
+					return false;
+				}
 			}
 		}
 	}
 </script>
 
-<style>
-@import url("./style.css");
+<style lang="less">
+@import url("./style.less");
 </style>
