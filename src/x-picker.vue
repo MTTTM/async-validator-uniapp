@@ -1,9 +1,11 @@
-<template name="x-picker">
-	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input':'']" >
-		 <picker class="picker-item" :mode="mode" :start="start" :end="end" @change="onChange" :disabled="disabled">
-			<x-input type="text" :value="value" prop="input" :disabled="disabled" :placeholder="placeholder"></x-input>
+<template name="booleen-x-picker">
+	<view class="booleen-x-input" :class="[errorTxt&&errorField==prop?'booleen-x-error-input':'',disabled?'booleen-x-input-disabled':'']" >
+		 <picker class="picker-item" :value="value" :mode="mode" :start="start" :end="end" @change="onChange" :disabled="disabled">
+			<view  class="uni-input" type="text" :prop="prop" :disabled="disabled">
+				{{value?value:placeholder}}
+			</view>
          </picker>
-		 <view class="x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
+		 <view class="booleen-x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
 	</view>
 </template>
 
@@ -11,7 +13,7 @@
 	import Mixins from "./mixins.js"
 	export default {
 		mixins:[Mixins],
-		name: "x-picker",
+		name: "booleen-x-picker",
 		props: {
 			placeholder:{
 				type:String,
