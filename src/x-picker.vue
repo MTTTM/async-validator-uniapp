@@ -1,6 +1,6 @@
 <template name="booleen-x-picker">
 	<view class="booleen-x-input" :class="[errorTxt&&errorField==prop?'booleen-x-error-input':'',disabled?'booleen-x-input-disabled':'']" >
-		 <picker class="picker-item" :value="value" :mode="mode" :start="start" :end="end" @change="onChange" :disabled="disabled">
+		 <picker class="picker-item" :value="value" :mode="mode" :start="start" :end="end" @change="onChange" @cancel="onCancel" :disabled="disabled">
 			<view  class="uni-input" type="text" :prop="prop" :disabled="disabled">
 				{{value?value:placeholder}}
 			</view>
@@ -51,6 +51,12 @@
 				default: () => {
 					return false;
 				}
+			}
+		},
+		methods:{
+			onCancel(){
+				//先该组件应用的父组件传递事件
+				this.$emit("cancel",false);
 			}
 		}
 	}

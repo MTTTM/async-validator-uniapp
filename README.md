@@ -3,6 +3,8 @@
 * 它类似于jquery validate
 * 如果你使用过elementui或者iview的表单校验，你会很容易就喜欢上它
 * 没错，它依赖了async-validator，同时提供了和elementui表单校验几乎一样的接口
+* 支持自定义校验规则
+* 暂时不支持动态新增或减少需要校验的表单元素
 
 ## Usage
 ###安装
@@ -16,7 +18,7 @@
 > import xPlus  from 'async-validator-uniapp'
 
 ##### 提示
->  <font face="黑体" color="red" >[WARNING]</font> uniapp模块停止更新，如果需要拷贝到项目，请npm下载后拷贝使用，入口文件是index.js
+>  <font face="黑体" color="red" >[WARNING]</font> 1.0.3之后，可能会停止插件市场的更新，如果需要拷贝到项目，请npm下载后拷贝使用，入口文件是index.js
 
 ### 全局导入
 
@@ -44,7 +46,7 @@
 this.$refs['form的ref'].validate
 
 
-#### validateField校验当个表单
+#### validateField校验单个表单
 this.$refs['form的ref'].validateField('对应表单的prop')
 #### resetFields 清空某个表单或者整个from
 this.$refs['form的ref'].resetFields('对应表单的prop,如果不填就是清空整个form')
@@ -73,22 +75,24 @@ ref|Object|--|x-form组件的应用可以调用validateField和validate
 属性名|类型|默认值|说明
 ---|:--:|:--:|---:
 type|string|--|默认text,类型请参考uniapp文档
-value|string|Number|表单显示值
-prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得key保持一致
+value|string|--|表单显示值
+disabled|Boolean|false|禁用
+prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的key保持一致
 @input|Function|--|同步数据到当前页面
 
 #### x-checkbox-group
 属性名|类型|默认值|说明
 ---|:--:|:--:|---:
-value|string|Number|表单显示值
-prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得key保持一致
+value|string|--|表单显示值
+prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的key保持一致
 @input|Function|--|同步数据到当前页面
 
 #### x-radio-group
 属性名|类型|默认值|说明
 ---|:--:|:--:|---:
-value|string|Number|表单显示值
-prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得key保持一致
+value|string|--|表单显示值
+label|string|--|提示文字
+prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的key保持一致
 @input|Function|--|同步数据到当前页面
 
 #### x-checkbox
@@ -97,7 +101,7 @@ prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得ke
 value|string|--|表单显示值
 label|string|--|提示文字
 disabled|Boolean|false|禁用
-prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得key保持一致
+prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的key保持一致
 @input|Function|--|同步数据到当前页面
 #### x-radio
 属性名|类型|默认值|说明
@@ -105,7 +109,7 @@ prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得ke
 value|string|--|表单显示值
 label|string|--|提示文字
 disabled|Boolean|false|禁用
-prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得key保持一致
+prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的key保持一致
 @input|Function|--|同步数据到当前页面
 
 #### x-textarea
@@ -114,17 +118,18 @@ prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得ke
 value|string|--|表单显示值
 label|string|--|提示文字
 disabled|Boolean|false|禁用
-prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得key保持一致
+prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的key保持一致
 @input|Function|--|同步数据到当前页面
 
 #### x-picker
 属性名|类型|默认值|说明
 ---|:--:|:--:|---:
-value|string|Number|表单显示值
+value|string|--|表单显示值
 disabled|Boolean|false|禁用
 placeholder|String|"请选择"|占位符
-prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得key保持一致
+prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的key保持一致
 @input|Function|--|同步数据到当前页面
+@cancel|Function|--|取消事件
 
 ## 代码块
 ### 基础校验
