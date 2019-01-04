@@ -1,14 +1,14 @@
-<template name="x-textarea">
-	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input':'',disabled?'x-input-disabled':'']">
+<template name="booleen-x-textarea">
+	<view class="booleen-x-input" :class="[errorTxt&&errorField==prop?'booleen-x-error-input':'',disabled?'booleen-x-input-disabled':'']">
 		<textarea :placeholder="placeholder" style="width: 100%;" :value="value" @input="onChange" @blur='onBlur' :disabled="disabled" />
-		<view class="x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
+		<view class="booleen-x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
 	</view>
 </template>
 <script>
 	import Mixins from "./mixins.js"
 	export default {
 		mixins: [Mixins],
-		name: "x-textarea",
+		name: "booleen-x-textarea",
 		props: {
 			value: {
 				type: [String, Number],

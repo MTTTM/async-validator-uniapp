@@ -1,12 +1,12 @@
-<template name="x-radio">
-	<label class="x-input" :class="[disabled?'x-input-disabled':'']">
-	  <radio :value="value" :checked="checked" :disabled="disabled" color="color" /><text class="x-input-label">{{label}}</text>
+<template name="booleen-x-radio">
+	<label class="booleen-x-input" :class="[disabled?'booleen-x-input-disabled':'']">
+	  <radio :value="value" :checked="checked" :disabled="disabled" color="color" /><text class="booleen-x-input-label">{{label}}</text>
 	</label>
 </template>
 
 <script>
 	export default {
-		name:"x-radio",
+		name:"booleen-x-radio",
 		props:{
 			checked:{
 				required: false,

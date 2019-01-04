@@ -6,7 +6,6 @@
 
 <script>
 	let schema = require('async-validator').default;
-	console.log("schema", schema)
 	import Event from "./watch.js"
 	export default {
 		name: "x-form",
@@ -32,11 +31,9 @@
 		},
 		created() {
 			Event.$on("change", (val) => {
-				console.log("form-val", val)
 				this.onChange(val);
 			});
 			Event.$on("blur", (val) => {
-				console.log("blur", val)
 				this.onBlur(val);
 			});
 		},
@@ -166,10 +163,23 @@
 				//匹配到的规则数组
 				let matchRules = Array.isArray(rules) ? rules : this.rules[prop];
 				for (let i = 0; i < matchRules.length; i++) {
-					let descriptor = {
-						[prop]: matchRules[i]
+					let descriptor={};
+					if(matchRules[i]&&!matchRules[i].validator){
+						//非自定义规则
+						descriptor = {
+							[prop]: matchRules[i]
+						}
 					}
-					console.log("descriptor", descriptor)
+					else{
+						//自定义规则
+						if(typeof matchRules[i].validator!="function"){
+							console.error(`${prop}的自定义校验规则validator不是一个有效函数`)
+							break;
+						}
+						descriptor = {
+							[prop]:matchRules[i].validator
+						}
+					}
 					let validator = new schema(descriptor);
 					let result = await this.valid(validator, prop, val);
 					Event.$emit("valid", { ...result
@@ -184,7 +194,14 @@
 				}
 				return Promise.resolve(pass);
 
-			}
+			},
+				/*
+				自定义规则
+			*/
+			customValider(){
+				
+			},
+			
 		}
 	}
 </script>

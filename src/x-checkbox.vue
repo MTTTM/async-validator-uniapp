@@ -1,12 +1,12 @@
-<template name="x-checkbox">
-	<label class="x-input" :class="[disabled?'x-input-disabled':'']">
-	 <checkbox :value="value" :checked="checked" :disabled="disabled" color="color" /><text class="x-input-label">{{label}}</text>
+<template name="booleen-x-checkbox">
+	<label class="booleen-x-input" :class="[disabled?'booleen-x-input-disabled':'']">
+	 <checkbox :value="value" :checked="checked" :disabled="disabled" color="color" /><text class="booleen-x-input-label">{{label}}</text>
 	</label>
 </template>
 
 <script>
 	export default {
-		name:"x-checkbox",
+		name:"booleen-x-checkbox",
 		props:{
 			checked:{
 				required: false,

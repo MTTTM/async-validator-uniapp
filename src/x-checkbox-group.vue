@@ -1,5 +1,5 @@
 <template name="x-checkbox-group">
-	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input-no-border ':'']" >
+	<view class="booleen-x-input" :class="[errorTxt&&errorField==prop?'booleen-x-error-input-no-border ':'']" >
 		<checkbox-group @change="onChange" :disabled="disabled">
 			<slot></slot>
 		</checkbox-group>

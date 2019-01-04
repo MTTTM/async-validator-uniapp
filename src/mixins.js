@@ -32,8 +32,10 @@ export default {
 	},
 	methods: {
 		onChange(e) {
+			if(!e.detail){
+				return;
+			}
 			this.inputValue = e.detail.value;
-			console.log("this.inputValue",this.inputValue)
 			let _this = this;
 			Event.$emit("change", {
 				val: _this.inputValue,
@@ -43,8 +45,10 @@ export default {
 			this.$emit("input",_this.inputValue)
 		},
 		onBlur(e) {
+			if(!e.detail){
+				return;
+			}
 			this.inputValue = e.detail.value;
-			console.log("this.inputValue",this.inputValue)
 			let _this = this;
 			Event.$emit("blur", {
 				val: _this.inputValue,

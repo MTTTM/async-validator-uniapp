@@ -1,9 +1,9 @@
-<template name="x-radio-group">
-	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input-no-border ':'',disabled?'x-input-disabled':'']" >
+<template name="booleen-x-radio-group">
+	<view class="booleen-x-input" :class="[errorTxt&&errorField==prop?'booleen-x-error-input-no-border ':'',disabled?'booleen-x-input-disabled':'']" >
 		<radio-group @change="onChange">
 			<slot></slot>
 		</radio-group>
-		<view class="x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
+		<view class="booleen-x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
 	</view>
 </template>
 

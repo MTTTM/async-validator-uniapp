@@ -115,7 +115,397 @@ placeholder|String|"请选择"|占位符
 prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得key保持一致
 @input|Function|--|同步数据到当前页面
 
-## example
+## 代码块
+### 基础校验
+```html
+<template>
+	<view>
+		<page-head :title="title"></page-head>
+		<view class="uni-padding-wrap uni-common-mt">
+			<x-form :rules="rules" :model="form" ref="ruleForm" @submit="customerSubmit">
+				<view class="uni-form-item uni-column">
+					<view class="title">普通文字(改变的时候检测){{form.input}}</view>
+					<x-input type="text" :val="form.input" @input="form.input=$event" prop="input"></x-input>
+				</view>
+				<view class="uni-form-item uni-column">
+					<view class="title">普通文字(失去焦点的时候检测){{form.input2}}</view>
+					<x-input type="text" :val="form.input2" @input="form.input2=$event" prop="input2"></x-input>
+				</view>
+				<view class="uni-form-item uni-column">
+					<view class="title">密码:{{form.password}}</view>
+					<x-input type="password" :val="form.password" @input="form.password=$event" prop="password"></x-input>
+				</view>
+				<view class="uni-form-item uni-column">
+					<view class="title">数字{{form.number}}</view>
+					<x-input type="number" :val="form.number" @input="form.number=$event" prop="number"></x-input>
+				</view>
+				<view class="uni-form-item uni-column">
+					<view class="title">小数点数字{{form.digit}}</view>
+					<x-input type="digit" :val="form.digit" @input="form.digit=$event" prop="digit"></x-input>
+				</view>
+				<view class="uni-form-item uni-column">
+					<view class="title">身份证{{form.idcard}}</view>
+					<x-input type="idcard" :val="form.idcard" @input="form.idcard=$event" prop="idcard"></x-input>
+				</view>
+				<view class="uni-form-item uni-column">
+					<view class="title">普通文字(改变的时候检测){{form.textarea}}</view>
+					<x-textarea type="text" placeholder="羊羊得亿" :value="form.textarea" @input="form.textarea=$event" prop="textarea"></x-textarea>
+				</view>
+				
+
+				<view class="uni-btn-v">
+					<button formType="submit">使用Submit</button>
+					<button @tap="customerSubmit">不使用Submit提交</button>
+					<button type="default" formType="reset">Reset</button>
+				</view>
+			</x-form>
+		</view>
+	</view>
+</template>
+<script>
+	export default {
+		data() {
+			const customX = (rule, value, callback) => {
+				if (value!==""&&value!=100) {
+					callback(new Error('请输入100'));
+				}
+				else{
+					callback();
+				}
+			};
+			
+			return {
+				title: 'form',
+				pickerHidden: true,
+				chosen: '',
+				form: {
+					input: "zz00",
+					input2: "zzyy",
+					passwordx: "123456",
+					number: "",
+					digit: "",
+					idcard: "",
+					textarea: "",
+				},
+				rules: {
+					textarea: [{
+						required: true,
+						message: '请输入textarea',
+						trigger: 'change'
+					}],
+					input: [{
+						required: true,
+						message: '请输入txt',
+						trigger: 'change'
+					}],
+					input2: [{
+						required: true,
+						message: '请输入input2',
+						trigger: 'blur'
+					}],
+					password: [{
+						required: true,
+						message: '请选择密码',
+						trigger: 'change'
+					}],
+					number: [{
+						required: true,
+						message: '请输入数字',
+						trigger: 'change'
+					}],
+					digit: [{
+						required: true,
+						message: '请输入小数点数字',
+						trigger: 'change'
+					}],
+					idcard: [{
+						required: true,
+						message: '请输入身份证',
+						trigger: 'change'
+					}]
+				}
+			}
+		},
+		methods: {
+			pickerConfirm: function(e) {
+				this.pickerHidden = true
+				this.chosen = e.target.value
+			},
+			pickerCancel: function(e) {
+				this.pickerHidden = true
+			},
+			pickerShow: function(e) {
+				this.pickerHidden = false
+			},
+			formSubmit: function(e) {
+				console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value))
+			},
+			formReset: function(e) {
+				console.log("清空数据")
+				this.chosen = ''
+			},
+			xchange() {
+				console.log("改变")
+			},
+			customerSubmit() {
+				this.$refs['ruleForm'].validate((valid) => {
+					if (valid) {
+						alert('submit!');
+					} else {
+						console.log('error submit!!');
+						return false;
+					}
+				});
+			},
+			validInput(k) {
+				this.$refs['ruleForm'].validateField(k)
+
+			}
+		}
+	}
+</script>
+
+<style>
+	.title {
+		padding: 10px 0 !important;
+	}
+</style>
+
+```
+
+
+### checkbox&&radio
+```html
+<template>
+	<view>
+		<page-head :title="title"></page-head>
+		<view class="uni-padding-wrap uni-common-mt">
+			<x-form :rules="rules" :model="form" ref="ruleForm" @submit="customerSubmit">
+				<view class="uni-form-item uni-column">
+					<view class="title">radio{{form.radio}}</view>
+					<x-radio-group :val="form.radio" @input="form.radio=$event" prop="radio">
+						<x-radio value="1" label="选项1" :checked="form.radio===1?true:false" :disabled="true" />
+						<x-radio value="2" label="选项2" :checked="form.radio===2?true:false" :disabled="true" />
+					</x-radio-group>
+				</view>
+				<view class="uni-form-item uni-column">
+					<view class="title">checkbox</view>
+					<x-checkbox-group :val="form.checkbox" @input="form.checkbox=$event" prop="checkbox" :disabled="true">
+						<template v-for="item in items">
+							<x-checkbox :key="item.value" :value="item.name" :label="item.value" :checked="form.checkbox.includes(item.name)"
+							 :disabled="item.disabled" />
+						</template>
+					</x-checkbox-group>
+					<button @tap="validInput('checkbox')">验证单个表单</button>
+				</view>
+				<view class="uni-btn-v">
+					<button formType="submit">使用Submit</button>
+					<button @tap="customerSubmit">不使用Submit提交</button>
+					<button type="default" formType="reset">Reset</button>
+				</view>
+			</x-form>
+		</view>
+	</view>
+</template>
+<script>
+	export default {
+		data() {
+			return {
+				title: 'form',
+				pickerHidden: true,
+				chosen: '',
+				items: [{
+						name: 'USA',
+						value: '美国',
+						disabled: true
+					},
+					{
+						name: 'CHN',
+						value: '中国'
+					},
+					{
+						name: 'BRA',
+						value: '巴西'
+					},
+					{
+						name: 'JPN',
+						value: '日本'
+					},
+					{
+						name: 'ENG',
+						value: '英国'
+					},
+					{
+						name: 'TUR',
+						value: '法国'
+					}
+				],
+				form: {
+					checkbox: [],
+					radio: "",
+			
+				},
+				rules: {
+					checkbox: [{
+							type: 'array',
+							required: true,
+							message: '请选择checkbox',
+							trigger: 'change'
+						},
+						{
+							type: 'array',
+							min: 2,
+							message: '请选择至少2个checkbox',
+							trigger: 'change'
+						},
+					],
+					radio: [{
+						required: true,
+						message: '请选择radio',
+						trigger: 'change'
+					}]
+				}
+			}
+		},
+		methods: {
+			pickerConfirm: function(e) {
+				this.pickerHidden = true
+				this.chosen = e.target.value
+			},
+			pickerCancel: function(e) {
+				this.pickerHidden = true
+			},
+			pickerShow: function(e) {
+				this.pickerHidden = false
+			},
+			formSubmit: function(e) {
+				console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value))
+			},
+			formReset: function(e) {
+				console.log("清空数据")
+				this.chosen = ''
+			},
+			xchange() {
+				console.log("改变")
+			},
+			customerSubmit() {
+				this.$refs['ruleForm'].validate((valid) => {
+					if (valid) {
+						alert('submit!');
+					} else {
+						console.log('error submit!!');
+						return false;
+					}
+				});
+			},
+			validInput(k) {
+				this.$refs['ruleForm'].validateField(k)
+
+			}
+		}
+	}
+</script>
+
+<style>
+	.title {
+		padding: 10px 0 !important;
+	}
+</style>
+
+```
+
+
+###picker
+```html
+<template>
+	<view>
+		<page-head :title="title"></page-head>
+		<view class="uni-padding-wrap uni-common-mt">
+			<x-form :rules="rules" :model="form" ref="ruleForm" @submit="customerSubmit">
+				<view class="uni-form-item uni-column">
+					<view class="title">时间选择:{{form.time}}</view>
+					<x-picker mode="time" start="09:00" end="06:00" :value="form.time" @input="form.time=$event" prop="time"></x-picker>
+				</view>
+				<view class="uni-btn-v">
+					<button formType="submit">使用Submit</button>
+					<button @tap="customerSubmit">不使用Submit提交</button>
+					<button type="default" formType="reset">Reset</button>
+				</view>
+			</x-form>
+		</view>
+	</view>
+</template>
+<script>
+	export default {
+		data() {
+			return {
+				title: 'form',
+				pickerHidden: true,
+				chosen: '',
+			
+				form: {
+					time: "24:00"
+				},
+				rules: {
+					time: [{
+						required: true,
+						message: '请选择time',
+						trigger: 'change'
+					}]
+				}
+			}
+		},
+		methods: {
+			pickerConfirm: function(e) {
+				this.pickerHidden = true
+				this.chosen = e.target.value
+			},
+			pickerCancel: function(e) {
+				this.pickerHidden = true
+			},
+			pickerShow: function(e) {
+				this.pickerHidden = false
+			},
+			formSubmit: function(e) {
+				console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value))
+			},
+			formReset: function(e) {
+				console.log("清空数据")
+				this.chosen = ''
+			},
+			xchange() {
+				console.log("改变")
+			},
+			customerSubmit() {
+				this.$refs['ruleForm'].validate((valid) => {
+					if (valid) {
+						alert('submit!');
+					} else {
+						console.log('error submit!!');
+						return false;
+					}
+				});
+			},
+			validInput(k) {
+				this.$refs['ruleForm'].validateField(k)
+
+			}
+		}
+	}
+</script>
+
+<style>
+	.title {
+		padding: 10px 0 !important;
+	}
+</style>
+
+```
+
+
+
+
+### 自定义规则
 
 ```html
    <template>
@@ -124,52 +514,9 @@ prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得ke
    		<view class="uni-padding-wrap uni-common-mt">
    			<x-form :rules="rules" :model="form" ref="ruleForm">
    				<view class="uni-form-item uni-column">
-   					<view class="title">普通文字(改变的时候检测){{form.input}}</view>
-   					<x-input type="text" :val="form.input" @input="form.input=$event" prop="input"></x-input>
+   					<view class="title">自定义规则，必须等于100</view>
+   					<x-input type="text" :val="form.custom" @input="form.custom=$event" prop="custom"></x-input>
    				</view>
-   				<view class="uni-form-item uni-column">
-   					<view class="title">普通文字(失去焦点的时候检测){{form.input2}}</view>
-   					<x-input type="text" :val="form.input2" @input="form.input2=$event" prop="input2"></x-input>
-   				</view>
-   				<view class="uni-form-item uni-column">
-   					<view class="title">时间选择:{{form.time}}</view>
-   					<x-picker mode="time" start="09:00" end="06:00" :val="form.time" @input="form.time=$event" prop="time"></x-picker>
-   				</view>
-   				<view class="uni-form-item uni-column">
-   					<view class="title">密码:{{form.password}}</view>
-   					<x-input type="password" :val="form.password"  @input="form.password=$event" prop="password"></x-input>
-   				</view>
-   				<view class="uni-form-item uni-column">
-   					<view class="title">数字{{form.number}}</view>
-   					<x-input type="number" :val="form.number" @input="form.number=$event" prop="number"></x-input>
-   				</view>
-   				<view class="uni-form-item uni-column">
-   					<view class="title">小数点数字{{form.digit}}</view>
-   					<x-input type="digit" :val="form.digit" @input="form.digit=$event" prop="digit"></x-input>
-   				</view>
-   				<view class="uni-form-item uni-column">
-   					<view class="title">身份证{{form.idcard}}</view>
-   					<x-input type="idcard" :val="form.idcard" @input="form.idcard=$event" prop="idcard"></x-input>
-   				</view>
-   				<view class="uni-form-item uni-column">
-   					<view class="title">radio{{form.radio}}</view>
-   					<x-radio-group :val="form.radio" @input="form.radio=$event" prop="radio">
-   						<label>
-   							<radio value="1" :checked="form.radio===1?true:false" />选项一</label>
-   						<label>
-   							<radio value="2" :checked="form.radio===2?true:false" />选项二</label>
-   					</x-radio-group>
-   				</view>
-   				<view class="uni-form-item uni-column">
-   					<view class="title">checkbox</view>
-   					<x-checkbox-group :val="form.checkbox" @input="form.checkbox=$event" prop="checkbox">
-   						<label v-for="item in items" :key="item.value">
-   							 <checkbox :value="item.name" :checked="form.checkbox.includes(item.name)" />{{item.value}}
-   						</label>
-   					</x-checkbox-group>
-   					<button @tap="validInput('checkbox')">验证单个表单</button>
-   				</view>
-   				
    				<view class="uni-btn-v">
    					<button formType="submit">使用Submit</button>
    					<button @tap="customerSubmit">不使用Submit提交</button>
@@ -182,100 +529,31 @@ prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得ke
    <script>
    	export default {
    		data() {
+   			const customX = (rule, value, callback) => {
+   				if (value!==""&&value!=100) {
+   					callback(new Error('请输入100'));
+   				}
+   				else{
+   					callback();
+   				}
+   			};
+   			
    			return {
    				title: 'form',
    				pickerHidden: true,
    				chosen: '',
-   				items: [{
-   						name: 'USA',
-   						value: '美国'
-   					},
-   					{
-   						name: 'CHN',
-   						value: '中国'
-   					},
-   					{
-   						name: 'BRA',
-   						value: '巴西'
-   					},
-   					{
-   						name: 'JPN',
-   						value: '日本'
-   					},
-   					{
-   						name: 'ENG',
-   						value: '英国'
-   					},
-   					{
-   						name: 'TUR',
-   						value: '法国'
-   					}
-   				],
    				form: {
-   					input: "zz00",
-   					input2:"zzyy",
-   					passwordx: "123456",
-   					number: "",
-   					digit: "",
-   					idcard: "",
-   					checkbox: [],
-   					radio: "",
-   					time:""
+   					custom:""
    				},
    				rules: {
-   					input: [{
-   						required: true,
-   						message: '请输入txt',
-   						trigger: 'change'
-   					}],
-   					input2: [{
-   						required: true,
-   						message: '请输入input2',
-   						trigger: 'blur'
-   					}],
-   					password: [{
-   						required: true,
-   						message: '请选择密码',
-   						trigger: 'change'
-   					}],
-   					number: [{
-   						required: true,
-   						message: '请输入数字',
-   						trigger: 'change'
-   					}],
-   					digit: [{
-   						required: true,
-   						message: '请输入小数点数字',
-   						trigger: 'change'
-   					}],
-   					idcard: [{
-   						required: true,
-   						message: '请输入身份证',
-   						trigger: 'change'
-   					}],
-   					checkbox: [{
-   						type: 'array',
-   						required: true,
-   						message: '请选择checkbox',
-   						trigger: 'change'
-   					},
-   					 {
-   					 	type: 'array',
-   					 	min:2,
-   					 	message: '请选择至少2个checkbox',
-   					 	trigger: 'change'
-   					 },
-   					],
-   					radio: [{
-   						required: true,
-   						message: '请选择radio',
-   						trigger: 'change'
-   					}],
-   					time: [{
-   						required: true,
-   						message: '请选择time',
-   						trigger: 'change'
-   					}],
+   					custom:[
+   						{
+   							required: true,
+   							message: '请输入',
+   							trigger: 'change'
+   						},
+   						{ validator: customX, trigger: 'blur' }
+   					]
    				}
    			}
    		},
@@ -300,17 +578,17 @@ prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得ke
    			xchange() {
    				console.log("改变")
    			},
-   			customerSubmit(){
-   				 this.$refs['ruleForm'].validate((valid) => {
-   				  if (valid) {
-   					alert('submit!');
-   				  } else {
-   					console.log('error submit!!');
-   					return false;
-   				  }
+   			customerSubmit() {
+   				this.$refs['ruleForm'].validate((valid) => {
+   					if (valid) {
+   						alert('submit!');
+   					} else {
+   						console.log('error submit!!');
+   						return false;
+   					}
    				});
    			},
-   			validInput(k){
+   			validInput(k) {
    				this.$refs['ruleForm'].validateField(k)
    
    			}
@@ -324,14 +602,8 @@ prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值得ke
    	}
    </style>
    
+   
 ```
-
-
-
-
-
-
-
 
 
 

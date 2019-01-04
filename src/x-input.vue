@@ -1,27 +1,27 @@
-<template name="x-input">
-	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input':'',disabled?'x-input-disabled':'']" v-if="type==='text'">
+<template name="booleen-x-input">
+	<view class="booleen-x-input" :class="[errorTxt&&errorField==prop?'booleen-x-error-input':'',disabled?'booleen-x-input-disabled':'']" v-if="type==='text'">
 		<input class="uni-input" :value="value" :placeholder="placeholder" @input="onChange" @blur='onBlur' :disabled="disabled" />
-		<view class="x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
+		<view class="booleen-x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
 	</view>
-	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input':'',disabled?'x-input-disabled':'']" v-else-if="type==='password'">
+	<view class="booleen-x-input" :class="[errorTxt&&errorField==prop?'booleen-x-error-input':'',disabled?'booleen-x-input-disabled':'']" v-else-if="type==='password'">
 		<input class="uni-input" password="true" :value="value" :placeholder="placeholder" @input="onChange" @blur='onBlur'
 		 :disabled="disabled" />
-		<view class="x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
+		<view class="booleen-x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
 	</view>
-	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input':'',disabled?'x-input-disabled':'']" v-else-if="type==='number'">
+	<view class="booleen-x-input" :class="[errorTxt&&errorField==prop?'booleen-x-error-input':'',disabled?'booleen-x-input-disabled':'']" v-else-if="type==='number'">
 		<input class="uni-input" type="number" :value="value" :placeholder="placeholder" @input="onChange" @blur='onBlur'
 		 :disabled="disabled" />
-		<view class="x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
+		<view class="booleen-x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
 	</view>
-	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input':'',disabled?'x-input-disabled':'']" v-else-if="type==='digit'">
+	<view class="booleen-x-input" :class="[errorTxt&&errorField==prop?'booleen-x-error-input':'',disabled?'booleen-x-input-disabled':'']" v-else-if="type==='digit'">
 		<input class="uni-input" type="digit" :value="value" :placeholder="placeholder" @input="onChange" @blur='onBlur'
 		 :disabled="disabled" />
-		<view class="x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
+		<view class="booleen-x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
 	</view>
-	<view class="x-input" :class="[errorTxt&&errorField==prop?'x-error-input':'',disabled?'x-input-disabled':'']" v-else-if="type==='idcard'">
+	<view class="booleen-x-input" :class="[errorTxt&&errorField==prop?'booleen-x-error-input':'',disabled?'booleen-x-input-disabled':'']" v-else-if="type==='idcard'">
 		<input class="uni-input" type="idcard" :value="value" :placeholder="placeholder" @input="onChange" @blur='onBlur'
 		 :disabled="disabled" />
-		<view class="x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
+		<view class="booleen-x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
 	</view>
 
 </template>
@@ -29,7 +29,7 @@
 	import Mixins from "./mixins.js"
 	export default {
 		mixins: [Mixins],
-		name: "x-input",
+		name: "booleen-x-input",
 		props: {
 			type: {
 				type: String,
