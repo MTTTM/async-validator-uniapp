@@ -16,13 +16,24 @@
 > import xPlus  from 'async-validator-uniapp'
 
 ##### 提示
-> uniapp包会比npm上面的滞后或停止更新
+>  <font face="黑体" color="red" >[WARNING]</font> uniapp模块停止更新，如果需要拷贝到项目，请npm下载后拷贝使用，入口文件是index.js
 
 ### 全局导入
 
 ```html
     import xPlus from "async-validator-uniapp"
 	xPlus.install(Vue);
+```
+### 局部引入
+```javascript
+ import {xForm} from "async-validator-uniapp";
+ import {xInput} from "async-validator-uniapp";
+ import {xCheckboxGroup} from "async-validator-uniapp";
+ import {xCheckbox} from "async-validator-uniapp";
+ import {xRadioGroup} from "async-validator-uniapp";
+ import {xRadio} from "async-validator-uniapp";
+ import {xPicker} from "async-validator-uniapp";
+ import {xTextarea} from "async-validator-uniapp";
 ```
 ### API
  #### xPlus.install
