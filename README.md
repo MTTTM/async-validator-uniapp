@@ -1,4 +1,4 @@
-## async-validator-uniapp
+## <a name="async-validator-uniapp">async-validator-uniapp</a>
 * 一个简单的表单校验组件
 * 它类似于jquery validate
 * 如果你使用过elementui或者iview的表单校验，你会很容易就喜欢上它
@@ -52,18 +52,18 @@ this.$refs['form的ref'].validateField('对应表单的prop')
 this.$refs['form的ref'].resetFields('对应表单的prop,如果不填就是清空整个form')
 
 ### 标签
-#####  x-form
-#####  x-input
-#####  x-checkbox-group
-#####  x-radio-group
-#####  x-picker
-#####  x-radio
-#####  x-checkbox
-#####  x-textarea
+#####  <a href="#x-form">x-form</a>
+#####  <a href="#x-input">x-input</a>
+#####  <a href="#x-checkbox-group">x-checkbox-group</a>
+#####  <a href="#x-radio-group"> x-radio-group</a>
+#####  <a href="#x-picker">x-picker</a>
+#####  <a href="#x-radio">x-radio</a>
+#####  <a href="#x-checkbox">x-checkbox</a>
+#####  <a href="#x-textarea">x-textarea</a>
 
 ### 标签属性(没有特殊说明的和uniapp保存一致)
  
-#### x-form
+#### <a name="x-form">x-form</a>
 
 属性名|类型|默认值|说明
 ---|:--:|:--:|---:
@@ -71,7 +71,7 @@ rules|object|--|必填，校验规则
 model|object|--|必填，表单数据
 ref|Object|--|x-form组件的应用可以调用validateField和validate
 
-#### x-input
+#### <a name="x-input">x-input</a>
 属性名|类型|默认值|说明
 ---|:--:|:--:|---:
 type|string|--|默认text,类型请参考uniapp文档
@@ -80,14 +80,14 @@ disabled|Boolean|false|禁用
 prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的key保持一致
 @input|Function|--|同步数据到当前页面
 
-#### x-checkbox-group
+####  <a name="x-checkbox-group">x-checkbox-group</a>
 属性名|类型|默认值|说明
 ---|:--:|:--:|---:
 value|string|--|表单显示值
 prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的key保持一致
 @input|Function|--|同步数据到当前页面
 
-#### x-radio-group
+#### <a name="x-radio-group">x-radio-group</a>
 属性名|类型|默认值|说明
 ---|:--:|:--:|---:
 value|string|--|表单显示值
@@ -95,15 +95,7 @@ label|string|--|提示文字
 prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的key保持一致
 @input|Function|--|同步数据到当前页面
 
-#### x-checkbox
-属性名|类型|默认值|说明
----|:--:|:--:|---:
-value|string|--|表单显示值
-label|string|--|提示文字
-disabled|Boolean|false|禁用
-prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的key保持一致
-@input|Function|--|同步数据到当前页面
-#### x-radio
+#### <a name="x-checkbox">x-checkbox</a>
 属性名|类型|默认值|说明
 ---|:--:|:--:|---:
 value|string|--|表单显示值
@@ -111,8 +103,7 @@ label|string|--|提示文字
 disabled|Boolean|false|禁用
 prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的key保持一致
 @input|Function|--|同步数据到当前页面
-
-#### x-textarea
+####  <a name="x-radio">x-radio</a>
 属性名|类型|默认值|说明
 ---|:--:|:--:|---:
 value|string|--|表单显示值
@@ -121,7 +112,16 @@ disabled|Boolean|false|禁用
 prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的key保持一致
 @input|Function|--|同步数据到当前页面
 
-#### x-picker
+####  <a name="x-textarea">x-textarea</a>
+属性名|类型|默认值|说明
+---|:--:|:--:|---:
+value|string|--|表单显示值
+label|string|--|提示文字
+disabled|Boolean|false|禁用
+prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的key保持一致
+@input|Function|--|同步数据到当前页面
+
+#### <a name="x-picker">x-picker</a>
 属性名|类型|默认值|说明
 ---|:--:|:--:|---:
 value|string|--|表单显示值
@@ -132,7 +132,12 @@ prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的ke
 @cancel|Function|--|取消事件
 
 ## 代码块
-### 基础校验
+#####  <a href="#基础校验">基础校验</a>
+#####  <a href="#checkbox&&radio">checkbox&&radio</a>
+#####  <a href="#picker">picker</a>
+#####   <a href="#自定义规则">自定义规则</a>
+   
+### <a name="基础校验">基础校验</a>
 ```html
 <template>
 	<view>
@@ -290,7 +295,7 @@ prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的ke
 ```
 
 
-### checkbox&&radio
+###  <a name="checkbox&&radio">checkbox&&radio</a>
 ```html
 <template>
 	<view>
@@ -431,7 +436,7 @@ prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的ke
 ```
 
 
-###picker
+### <a name="picker">picker</a>
 ```html
 <template>
 	<view>
@@ -521,7 +526,7 @@ prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的ke
 
 
 
-### 自定义规则
+### <a name="自定义规则">自定义规则</a>
 
 ```html
    <template>
@@ -622,6 +627,7 @@ prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的ke
 ```
 
 
+### <a href="#async-validator-uniapp"><font face="黑体" color="red" size="5" >回到顶部</font></a>
 
 
 
