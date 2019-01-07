@@ -8,6 +8,7 @@ export default {
 		}
 	},
 	created() {
+		//校验
 		Event.$on("valid", (data) => {
 			if(data.prop!==this.prop){
 				return;
@@ -27,6 +28,14 @@ export default {
 				this.errorTxt = t[0].message;
 				this.errorField = t[0].field;
 			}
+		});
+
+		//重置
+		Event.$on("reset", (e) => {
+			this.inputValue="";
+			//不需要通知Form
+			//通知本组件
+			this.$emit("input",this.inputValue)
 		});
 
 	},

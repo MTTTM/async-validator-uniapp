@@ -1,29 +1,29 @@
-import form from './x-form.vue'
-import input from './x-input.vue'
-import checkboxGroup from './x-checkbox-group.vue'
-import checkbox from './x-checkbox.vue'
-import radioGroup from './x-radio-group.vue'
-import radio from './x-radio.vue'
-import picker from './x-picker.vue'
-import textarea from './x-textarea.vue'
+import xxform from './xForm.vue'
+import xxinput from './xInput.vue'
+import checkboxGroup from './xCheckboxGroup.vue'
+import checkbox from './xCheckbox.vue'
+import radioGroup from './xRadioGroup.vue'
+import radio from './xRadio.vue'
+import picker from './xPicker.vue'
+import textarea from './xTextarea.vue'
 const xPlus = {};
 xPlus.install = function(Vue, pr) {
-	let p = String(pr).length && /^[a-z]&/.test(pr) ? pr : 'x';
-	Vue.component(`${p}-form`, form)
-	Vue.component(`${p}-input`, input)
-	Vue.component(`${p}-checkbox-group`, checkboxGroup)
-	Vue.component(`${p}-checkbox`, checkbox)
-	Vue.component(`${p}-radio-group`, radioGroup)
-	Vue.component(`${p}-radio`, radio)
-	Vue.component(`${p}-picker`, picker)
-	Vue.component(`${p}-textarea`, textarea)
+	Vue.component("bl-form", xxform)
+	Vue.component("bl-input", xxinput)
+	Vue.component("bl-checkbox-group", checkboxGroup)
+	Vue.component("bl-checkbox", checkbox)
+	Vue.component("bl-radio-group", radioGroup)
+	Vue.component("bl-radio", radio)
+	Vue.component("bl-picker", picker)
+	Vue.component("bl-textarea", textarea)
 }
-export const xForm=form;
-export const xInput=input;
-export const xFheckboxGroup=checkboxGroup;
+export const xForm=xxform;
+export const xInput=xxinput;
+export const xCheckboxGroup=checkboxGroup;
 export const xCheckbox=checkbox;
 export const xRadioGroup=radioGroup;
 export const xRadio=radio;
 export const xPicker=picker;		
-export const xTextarea=textarea;			
+export const xTextarea=textarea;	
+
 export default xPlus;

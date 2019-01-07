@@ -6,6 +6,7 @@
 * 支持自定义校验规则
 * 暂时不支持动态新增或减少需要校验的表单元素
 
+
 ## Usage
 ###安装
 ##### 若项目之前未使用npm管理依赖（项目根目录下无package.json文件），先在项目根目录执行命令初始化npm工程：
@@ -21,12 +22,30 @@
 >  <font face="黑体" color="red" >[WARNING]</font> 1.0.3之后，可能会停止插件市场的更新，如果需要拷贝到项目，请npm下载后拷贝使用，入口文件是index.js
 
 ### 全局导入
+在main.js里面注册，目前uniapp全局组件不支持xPlus.intall(Vue)的这种方式
 
 ```html
-    import xPlus from "async-validator-uniapp"
-	xPlus.install(Vue);
+
+    import xform from './components/async-validator-uniapp/src/xForm.vue'
+    import xinput from './components/async-validator-uniapp/src/xInput.vue'
+    import xcheckboxGroup from './components/async-validator-uniapp/src/xCheckboxGroup.vue'
+    import x from './components/async-validator-uniapp/src/xCheckbox.vue'
+    import xradioGroup from './components/async-validator-uniapp/src/xRadioGroup.vue'
+    import xradio from './components/async-validator-uniapp/src/xRadio.vue'
+    import xpicker from './components/async-validator-uniapp/src/xPicker.vue'
+    import xtextarea from './components/async-validator-uniapp/src/xTextarea.vue'
+    
+    Vue.component("x-form", xform)
+    Vue.component("x-input", xinput)
+    Vue.component("x-checkbox-group", xcheckboxGroup)
+    Vue.component("x-checkbox", xcheckbox)
+    Vue.component("x-radio-group", xradioGroup)
+    Vue.component("x-radio", xradio)
+    Vue.component("x-picker",xpicker)
+    Vue.component("x-textarea", xtextarea)
 ```
 ### 局部引入
+在需要的页面里面导入,并且注册
 ```javascript
  import {xForm} from "async-validator-uniapp";
  import {xInput} from "async-validator-uniapp";
@@ -36,22 +55,22 @@
  import {xRadio} from "async-validator-uniapp";
  import {xPicker} from "async-validator-uniapp";
  import {xTextarea} from "async-validator-uniapp";
+ export default {
+	 components:{xForm,xInput,xCheckboxGroup,xCheckbox,xRadioGroup,xRadio,xPicker,xTextarea}
+ }
 ```
-### API
- #### xPlus.install
+## API
+### xPlus.install <font face="黑体" color="red" >[WARNING]暂时不支持，请不要使用</font>
 ##### 第一个参数是Vue
 ##### 第二个参数是你要给你的标签添加的前缀，如果不使用默认是"x"
-
-#### validate  验证整个form是否通过校验
+### validate  验证整个form是否通过校验
 this.$refs['form的ref'].validate
-
-
-#### validateField校验单个表单
+### validateField校验单个表单
 this.$refs['form的ref'].validateField('对应表单的prop')
-#### resetFields 清空某个表单或者整个from
+### resetFields 清空某个表单或者整个from
 this.$refs['form的ref'].resetFields('对应表单的prop,如果不填就是清空整个form')
 
-### 标签
+## 标签目录
 #####  <a href="#x-form">x-form</a>
 #####  <a href="#x-input">x-input</a>
 #####  <a href="#x-checkbox-group">x-checkbox-group</a>
@@ -61,7 +80,7 @@ this.$refs['form的ref'].resetFields('对应表单的prop,如果不填就是清�
 #####  <a href="#x-checkbox">x-checkbox</a>
 #####  <a href="#x-textarea">x-textarea</a>
 
-### 标签属性(没有特殊说明的和uniapp保存一致)
+## 标签属性(没有特殊说明的和uniapp保存一致)
  
 #### <a name="x-form">x-form</a>
 
@@ -136,6 +155,7 @@ prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的ke
 #####  <a href="#checkbox&&radio">checkbox&&radio</a>
 #####  <a href="#picker">picker</a>
 #####   <a href="#自定义规则">自定义规则</a>
+#####   <a href="#动态增减表单项">动态增减表单项</a>
    
 ### <a name="基础校验">基础校验</a>
 ```html
@@ -624,6 +644,104 @@ prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的ke
    </style>
    
    
+```
+###  <a name="动态增减表单项">动态增减表单项</a>
+
+```html
+ <template>
+	<view>
+		<view class="uni-padding-wrap uni-common-mt">
+			<x-form :rules="rules" :model="form" ref="ruleForm" @submit="customerSubmit">
+				<view class="uni-form-item uni-column">
+					<view class="title">普通文字(改变的时候检测){{form.input}}</view>
+					<x-input type="text" :value="form.input" @input="changeInput('input',$event)" prop="input"></x-input>
+				</view>
+                <view class="uni-form-item uni-column" v-for="item in inputArray" :key="item.key" style="position:relative;">
+					<x-input type="text" :value="form[item.key]" @input="changeInput(item.key,$event)" :prop="item.key" placeholder="我系追加的，辣"></x-input>
+                      <button @tap="dele(item.key)" size="mini" type="warn" style="position:absolute;right:5px;top:15px;z-index:20;">删</button>
+				</view>
+                <view>
+                    <button @tap="add">新增一个必填表单</button>
+                </view>
+				<view class="uni-btn-v">
+					<button formType="submit">使用Submit</button>
+					<button @tap="customerSubmit">不使用Submit提交</button>
+					<button type="default" formType="reset">Reset</button>
+				</view>
+			</x-form>
+		</view>
+	</view>
+</template>
+<script>
+	export default {
+        name:"decreateInput",
+		data() {
+			return {
+                modelShow:false,
+                keyx:0,
+                inputArray:[
+
+                ],
+				form: {
+					input: "zz00",
+					input2: "zzyy",
+					passwordx: "123456",
+					number: "",
+					digit: "",
+					idcard: "",
+					textarea: "",
+				},
+				rules: {
+					input: [{
+						required: true,
+						message: '请输入txt',
+						trigger: 'change'
+					}]
+				}
+			}
+		},
+		methods: {
+			add() {
+                    this.keyx+=1;
+                    let k="x"+ this.keyx;
+                    this.inputArray.push({
+                        key:k,
+                        value:""
+                    });
+                    this.form[k]="";
+                    this.rules[k]=[{
+						required: true,
+						message: `请输入${"x"+ this.keyx}`,
+						trigger: 'change'
+					}];
+            },
+            dele(key){
+                this.inputArray=this.inputArray.filter((item)=>item.key!=key);
+                delete this.form[key];
+                delete this.rules[key];
+            },
+			customerSubmit() {
+				this.$refs['ruleForm'].validate((valid) => {
+					if (valid) {
+						uni.showToast({
+                            title: '提交成功',
+                            duration: 2000
+                        });
+					} else {
+						console.log('error submit!!');
+					}
+				});
+			},
+			validInput(k) {
+				this.$refs['ruleForm'].validateField(k)
+
+			},
+			changeInput(k,val){
+				this.form[k]=val;
+			}
+		}
+	}
+</script>
 ```
 
 
