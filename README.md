@@ -60,7 +60,7 @@
  }
 ```
 ## API
-### xPlus.install <font face="黑体" color="red" >[WARNING]暂时不支持，请不要使用</font>
+### xPlus.install <font face="黑体" color="red" >[WARNING]暂时不支持，请不要使用xPlus.install</font>
 ##### 第一个参数是Vue
 ##### 第二个参数是你要给你的标签添加的前缀，如果不使用默认是"x"
 ### validate  验证整个form是否通过校验

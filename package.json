@@ -1,6 +1,6 @@
 {
   "name": "async-validator-uniapp",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "a simgle tool for valid form",
   "main": "./src/index.js",
   "scripts": {
