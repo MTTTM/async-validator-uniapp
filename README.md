@@ -5,7 +5,7 @@
 * 没错，它依赖了async-validator，同时提供了和elementui表单校验几乎一样的接口
 * 支持自定义校验规则
 * 支持动态新增或减少需要校验的表单元素
-
+* [在线demo，请开启手机模拟](https://mtttm.github.io/async-validator-uniapp/#/)
 
 ## Usage
 ###安装
