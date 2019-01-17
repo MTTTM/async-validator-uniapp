@@ -63,6 +63,12 @@ export default {
 		//校验
  		Event.$on("valid", (data) => {
  			this.snycClass(data);
+			if(data.reset){
+				this.isSuccess="";
+				this.errorTxt = "";
+				this.errorField = "";
+				return;
+			}
  			if(data.prop!==this.prop){
  				return;
 			} 			
@@ -89,6 +95,8 @@ export default {
  		Event.$on("reset", (e) => {
  			this.inputValue="";
  			this.isSuccess="";
+			this.errorTxt = "";
+			this.errorField = "";
  			//不需要通知Form
  			//通知本组件
  			//this.$emit("input",this.inputValue)

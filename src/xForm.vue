@@ -183,7 +183,8 @@
 				if (prop) {
 					Event.$emit("valid", {
 						p: true,
-						prop: prop
+						prop: prop,
+						reset:true
 					});
 					return;
 				}
@@ -191,7 +192,8 @@
 				for (let k of Object.keys(this.rules)) {
 					Event.$emit("valid", {
 						p: true,
-						prop: k
+						prop: k,
+						reset:true
 					});
 				};
 				
