@@ -1,6 +1,6 @@
 <template name="booleen-x-radio">
 	<label class="booleen-x-input" :class="[disabled?'booleen-x-input-disabled':'']">
-	  <radio :value="value" :checked="checked" :disabled="disabled" color="color" /><text class="booleen-x-input-label">{{label}}</text>
+	  <radio :value="value" :checked="checked" :disabled="disabled" :color="color" /><text class="booleen-x-input-label">{{label}}</text>
 	</label>
 </template>
 

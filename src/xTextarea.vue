@@ -1,7 +1,7 @@
 <template name="booleen-x-textarea">
-	<view class="booleen-x-input" :class="[errorTxt&&errorField==prop?'booleen-x-error-input':'',disabled?'booleen-x-input-disabled':'']">
+	<view class="booleen-x-input" :class="[errorClassName,disabledClassName,successClassName,disabled?'booleen-x-input-disabled':'']">
 		<textarea :placeholder="placeholder" style="width: 100%;" :value="value" @input="onChange" @blur='onBlur' :disabled="disabled" />
-		<view class="booleen-x-error" v-if="errorTxt&&errorField==prop">{{errorTxt}}</view>
+		<view class="boolean-x-error-tip" :class="[errorTxtClassName] ">{{errorTxt}}</view>
 	</view>
 </template>
 <script>

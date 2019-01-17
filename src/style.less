@@ -17,17 +17,24 @@
 	&.booleen-x-error-input {
 		border: 1px solid red;
 		color: red;
-		.booleen-x-error {
+		//raido checkbox类型不需要边框
+		&.booleen-x-error-input-no-border {
 			color: red;
-			position: absolute;
-			left: 0;
-			bottom: -22px;
+			border:none;
 		}
+		
 	}
-	//raido checkbox类型不需要边框
-	&.booleen-x-error-input-no-border {
+	.boolean-x-error-tip{
+		position: absolute;
+		left: 0;
+		bottom: -22px;
+		&.booleen-x-error{
 		color: red;
+	    }
+		
 	}
+	
+	
 	//禁用样式
 	&.booleen-x-input-disabled {
 		color: #c0c4cc;

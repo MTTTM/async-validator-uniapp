@@ -1,5 +1,5 @@
 <template name="booleen-x-picker">
-	<view class="booleen-x-input" :class="[errorTxt&&errorField==prop?'booleen-x-error-input':'',disabled?'booleen-x-input-disabled':'']" >
+	<view  class="booleen-x-input" :class="[errorClassName,disabledClassName,successClassName,disabled?'booleen-x-input-disabled':'']" >
 		 <picker class="picker-item" :value="value" :mode="mode" :start="start" :end="end" @change="onChange" @cancel="onCancel" :disabled="disabled">
 			<view  class="uni-input" type="text" :prop="prop" :disabled="disabled">
 				{{value?value:placeholder}}
