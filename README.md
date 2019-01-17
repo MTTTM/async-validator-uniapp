@@ -7,6 +7,11 @@
 * 支持动态新增或减少需要校验的表单元素
 * [在线demo，请开启手机模拟](https://mtttm.github.io/async-validator-uniapp/#/)
 
+## <font face="黑体" color="red" >[WARNING]1.1.0颁布beta颁布已经出来，在线demo和github上是最新的，uniapp文档会稍后更新</font>
+ ##### 替换掉@input的方式同步数据，使用v-mode
+ ##### checkboxgroup和radioxgroup使用:value.sync="mock"的方式同步数据
+ ##### 新增顺序验证和toast提示的方式，toast提示方式不再除法表单样式的修改
+ ##### 新增自定义错误样式和成功样式
 ## Usage
 ###安装
 ##### 若项目之前未使用npm管理依赖（项目根目录下无package.json文件），先在项目根目录执行命令初始化npm工程：
@@ -157,6 +162,7 @@ prop|string|--|对应的校验规则，强烈推荐和该表单的绑定值的ke
 #####   <a href="#自定义规则">自定义规则</a>
 #####   <a href="#动态增减表单项">动态增减表单项</a>
    
+
 ### <a name="基础校验">基础校验</a>
 ```html
 <template>
