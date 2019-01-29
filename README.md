@@ -9,7 +9,84 @@
 * 支持toast提示&&按次序校验
 * [在线demo，请开启手机模拟](https://mtttm.github.io/async-validator-uniapp/#/)
 * <a href="https://github.com/MTTTM/async-validator-dev/tree/master/pages/form" target="_blank">demo源码</a> 
+ 
+## 简单实例demo源码(一般情况下，拷贝下面的demo，略修改下就可以投入生产)
+* 可以看到下面html源码
+* 我们只增加了一个自定义组件x-form
+* 以及绑定的数据和对应的校验规则
+* 还有toast来处理错误提示的方式
 
+```html
+  <template>
+  	<view>
+  		<view class="uni-padding-wrap uni-common-mt">
+  			<x-form :rules="rules" :model="form" ref="ruleForm" @submit="customerSubmit" :toast="true">
+  				<view class="uni-form-item uni-column">
+  					<view class="title">普通文字(改变的时候检测){{form.input}}</view>
+  					<input type="text" v-model="form.input" placeholder="我第二个校验"/>
+  				</view>
+  				<view class="uni-form-item uni-column">
+  					<view class="title">普通文字(失去焦点的时候检测){{form.input2}}</view>
+  					<input type="text" v-model="form.input2" placeholder="我先校验"/>
+  				</view>
+  				<view class="uni-btn-v">
+  					<button formType="submit">使用Submit</button>
+  					<button @tap="customerSubmit">不使用Submit提交</button>
+  					<button type="default" formType="reset">Reset</button>
+  				</view>
+  			</x-form>
+  		</view>
+  	</view>
+  </template>
+
+```
+
+```javascript
+<script>
+	export default {
+		data() {
+			return {
+				form: {
+					input: "",
+					input2: "",
+
+				},
+				rules: {
+					input: [{
+						required: true,
+						message: '请输入txt',
+                        trigger: 'change',
+                        sort:3,
+					}],
+					input2: [{
+						required: true,
+						message: '请输入input2',
+                        trigger: 'blur',
+                        sort:2
+					}]
+				}
+			}
+		},
+		methods: {
+			customerSubmit() {
+				this.$refs['ruleForm'].validate((valid,result) => {
+					if (valid) {
+
+					} else {
+						uni.showToast({
+                            title: result.error[0].message,
+                            duration: 1000,
+                            icon:"none"
+                        });
+						return false;
+					}
+				});
+			}
+		}
+	}
+</script>
+
+```
 
 ## Usage
 ###安装
@@ -63,10 +140,7 @@
 	 components:{xForm,xInput,xCheckboxGroup,xCheckbox,xRadioGroup,xRadio,xPicker,xTextarea}
  }
 ```
-## API
-### xPlus.install <font face="黑体" color="red" >[WARNING]暂时不支持，请不要使用xPlus.install</font>
-##### 第一个参数是Vue
-##### 第二个参数是你要给你的标签添加的前缀，如果不使用默认是"x"
+### 在js里面触发校验和查看校验结果
 ### validate  验证整个form是否通过校验
 this.$refs['form的ref'].validate
 ### validateField校验单个表单
@@ -74,7 +148,7 @@ this.$refs['form的ref'].validateField('对应表单的prop')
 ### resetFields 清空某个表单或者整个from
 this.$refs['form的ref'].resetFields('对应表单的prop,如果不填就是清空整个form')
 
-## 标签目录
+## 标签目录,很多情况下，你只需要用到x-form
 #####  <a href="#x-form">x-form</a>
 #####  <a href="#x-input">x-input</a>
 #####  <a href="#x-checkbox-group">x-checkbox-group</a>
@@ -84,7 +158,7 @@ this.$refs['form的ref'].resetFields('对应表单的prop,如果不填就是清�
 #####  <a href="#x-checkbox">x-checkbox</a>
 #####  <a href="#x-textarea">x-textarea</a>
 
-## 标签属性(没有特殊说明的和uniapp保存一致)
+## 标签属性,(没有特殊说明的和uniapp保存一致)
  
 #### <a name="x-form">x-form</a>
 

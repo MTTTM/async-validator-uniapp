@@ -53,6 +53,10 @@
 			if(this.toast){
 				this.SortRulesArray=this.sortRules();
 			}
+			else{
+				//监听数据改变
+				this.watchModel();
+			}
 		},
 		watch:{
 			rules(){
@@ -63,6 +67,18 @@
 			}
 		},
 		methods: {
+			watchModel(){
+				for (let [key, value] of Object.entries(this.model)) {
+					 this.$watch("model."+key,(newV,oldV)=>{
+						 Event.$emit("change", {
+						 	val: newV,
+						 	prop: key
+						 });
+					 },{
+						 immediate:false//刚绑定的时候不触发
+					 })
+				 }
+			},
 			onSubmit() {
 				this.validate();
 				this.$emit("submit")
@@ -111,16 +127,20 @@
 				let pass = true;
 				let promiseArray = [];
 				//是否按照顺序只校验排在最前未通过的表单,并且不高亮表单
+				let toastPass=true;
+				let toastEnd={};
 				if(this.toast){
 					 for(let i=0;i<this.SortRulesArray.length;i++){
-						 let end=await this.validateField(this.SortRulesArray[i].prop);
-						 if(!end.pass){
-							 if (typeof func == "function") {
-									func(end.pass,end.result);
-								}
+						  toastEnd=await this.validateField(this.SortRulesArray[i].prop);
+						 if(!toastEnd.pass){
+							 toastPass=false;
 							 break;
 						 }
 					 }
+					 //不管是否全部通过都必须回调
+					if (typeof func == "function") {
+						func(toastEnd.pass,toastEnd.result);
+					}
 					 return;
 				};
 				//讲每个表单的校验放到promise里面
@@ -208,6 +228,7 @@
 					validator.validate({
 						[prop]: val
 					}, (errors, fields) => {
+						console.log("errors",errors,fields)
 						if (errors) {
 
 							reslove({
@@ -273,6 +294,7 @@
 						pass = false;
 						break;
 					}
+					
 
 				}
 				return Promise.resolve({pass:pass,"result":result});

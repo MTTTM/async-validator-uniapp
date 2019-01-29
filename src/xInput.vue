@@ -1,26 +1,26 @@
 <template name="booleen-x-input">
-	<view class="booleen-x-input" :class="[errorClassName,disabledClassName,successClassName,disabled?'booleen-x-input-disabled':'']" v-if="type==='text'">
-		<input class="uni-input" :value="value" :placeholder="placeholder" @input="onChange" @blur='onBlur' :disabled="disabled" />
+	<view class="booleen-x-input" :class="[errorClassName,disabledClassName,successClassName,disabled?'booleen-x-input-disabled':'']" v-bind:style="xstyle" v-if="type==='text'">
+		<input :value="value" :placeholder="placeholder" :placeholder-style="placeholderStyle" @input="onChange" @blur='onBlur' :disabled="disabled" />
 		<errorTip :errorTxtClassName="errorTxtClassName" v-if="errorTxt&&errorField==prop" :errorTxt="errorTxt"></errorTip>
 	</view>
-	<view class="booleen-x-input" :class="[errorClassName,disabledClassName,successClassName,disabled?'booleen-x-input-disabled':'']" v-else-if="type==='password'">
-		<input class="uni-input" :value="value" :placeholder="placeholder" password="true" @input="onChange" @blur='onBlur' :disabled="disabled" />
+	<view  class="booleen-x-input" :class="[errorClassName,disabledClassName,successClassName,disabled?'booleen-x-input-disabled':'']" v-bind:style="xstyle" v-else-if="type==='password'">
+		<input :value="value" :placeholder="placeholder" :placeholder-style="placeholderStyle" password @input="onChange" @blur='onBlur' :disabled="disabled" />
 		<errorTip :errorTxtClassName="errorTxtClassName" v-if="errorTxt&&errorField==prop" :errorTxt="errorTxt"></errorTip>
 	</view>
-    <view class="booleen-x-input" :class="[errorClassName,disabledClassName,successClassName,disabled?'booleen-x-input-disabled':'']" v-else-if="type==='number'">
-		<input class="uni-input" :value="value" :placeholder="placeholder" type="number" @input="onChange" @blur='onBlur' :disabled="disabled" />
+    <view  class="booleen-x-input" :class="[errorClassName,disabledClassName,successClassName,disabled?'booleen-x-input-disabled':'']" v-bind:style="xstyle" v-else-if="type==='number'">
+		<input :value="value" :placeholder="placeholder" :placeholder-style="placeholderStyle" type="number" @input="onChange" @blur='onBlur' :disabled="disabled" />
 		<errorTip :errorTxtClassName="errorTxtClassName" v-if="errorTxt&&errorField==prop" :errorTxt="errorTxt"></errorTip>
 	</view>
-     <view class="booleen-x-input" :class="[errorClassName,disabledClassName,successClassName,disabled?'booleen-x-input-disabled':'']" v-else-if="type==='digit'">
-		<input class="uni-input" :value="value" :placeholder="placeholder" type="digit" @input="onChange" @blur='onBlur' :disabled="disabled" />
+     <view  class="booleen-x-input" :class="[errorClassName,disabledClassName,successClassName,disabled?'booleen-x-input-disabled':'']" v-bind:style="xstyle" v-else-if="type==='digit'">
+		<input :value="value" :placeholder="placeholder" :placeholder-style="placeholderStyle" type="digit" @input="onChange" @blur='onBlur' :disabled="disabled" />
 		<errorTip :errorTxtClassName="errorTxtClassName" v-if="errorTxt&&errorField==prop" :errorTxt="errorTxt"></errorTip>
 	</view>
-	  <view class="booleen-x-input" :class="[errorClassName,disabledClassName,successClassName,disabled?'booleen-x-input-disabled':'']" v-else-if="type==='idcard'">
-		<input class="uni-input" :value="value" :placeholder="placeholder"  type="idcard" @input="onChange" @blur='onBlur' :disabled="disabled" />
+	  <view  class="booleen-x-input" :class="[errorClassName,disabledClassName,successClassName,disabled?'booleen-x-input-disabled':'']" v-bind:style="xstyle" v-else-if="type==='idcard'">
+		<input :value="value" :placeholder="placeholder" :placeholder-style="placeholderStyle"  type="idcard" @input="onChange" @blur='onBlur' :disabled="disabled" />
 		<errorTip :errorTxtClassName="errorTxtClassName" v-if="errorTxt&&errorField==prop" :errorTxt="errorTxt"></errorTip>
 	</view>
-    <view class="booleen-x-input" :class="[errorClassName,disabledClassName,successClassName,disabled?'booleen-x-input-disabled':'']" v-else>
-		<input class="uni-input" :value="value" :placeholder="placeholder" @input="onChange" @blur='onBlur' :disabled="disabled" />
+    <view  class="booleen-x-input" :class="[errorClassName,disabledClassName,successClassName,disabled?'booleen-x-input-disabled':'']" v-bind:style="xstyle" v-else>
+		<input :value="value" :placeholder="placeholder" :placeholder-style="placeholderStyle" @input="onChange" @blur='onBlur' :disabled="disabled" />
 		<errorTip :errorTxtClassName="errorTxtClassName" v-if="errorTxt&&errorField==prop" :errorTxt="errorTxt"></errorTip>
 	</view>
 
@@ -33,32 +33,14 @@
 		props: {
 			type: {
 				type: String,
-				required: true,
+				required:false
 			},
-// 			value: {
-// 				type: [String, Number],
-// 			},
-// 			prop: {
-// 				type: String
-// 			},
-// 			placeholder: {
-// 				type: String,
-// 				default: "请输入"
-// 			},
-// 			disabled: {
-// 				type: Boolean,
-// 				default: () => {
-// 					return false;
-// 				}
-// 			},
-// 			errorClass:{
-// 				type:String,
-// 				default:""
-// 			},
-// 			successClass:{
-// 				type:String,
-// 				default:""
-// 			}
+			"placeholderStyle":{
+               type: String
+			}
+		},
+		created(){
+			console.log("this.xstyle",this.xstyle)
 		}
 	}
 </script>

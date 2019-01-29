@@ -38,6 +38,13 @@ export default {
 			type:String,
 			default:""
 		},
+		//app和小程序不支持全局修改封装好的组件的样式
+		xstyle:{
+			type:Object,
+			default(){
+				return {}
+			}
+		}
 		
 	},
 	computed:{
@@ -62,6 +69,7 @@ export default {
  		this.successClass?(this.succClass=this.successClass):"";
 		//校验
  		Event.$on("valid", (data) => {
+			 console.log("valid=====",data)
  			this.snycClass(data);
 			if(data.reset){
 				this.isSuccess="";

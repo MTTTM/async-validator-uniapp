@@ -26,4 +26,13 @@ export const xRadio=radio;
 export const xPicker=picker;		
 export const xTextarea=textarea;	
 
-export default xPlus;
+export default {
+	xForm:xxform,
+	xInput:xxinput,
+	xCheckboxGroup:checkboxGroup,
+	xCheckbox:checkbox,
+	xRadioGroup:radioGroup,
+	xRadio:radio,
+	xPicker:picker,
+	xTextarea:textarea
+};
