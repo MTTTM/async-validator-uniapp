@@ -8,7 +8,9 @@
 * 支持自定义错误//成功的样式
 * 支持toast提示&&按次序校验
 * [在线demo，请开启手机模拟](https://mtttm.github.io/async-validator-uniapp/#/)
+* 新增div-table(额外)
 * <a href="https://github.com/MTTTM/async-validator-dev/tree/master/pages/form" target="_blank">demo源码</a> 
+
  
 ## 简单实例demo源码(一般情况下，拷贝下面的demo，略修改下就可以投入生产)
 * 可以看到下面html源码
